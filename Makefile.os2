@@ -1,10 +1,10 @@
 # Makefile for OS/2 using Watcom compiler.
 #
 # wmake -f Makefile.os2
-# - builds using libxmp.dll and its import lib (libxmp.lib)
+# - builds xmp.exe linking to libxmp.lib (the import library of libxmp.dll)
 #
 # wmake -f Makefile.os2 target=static
-# - builds using the static library xmp_static.lib
+# - builds xmp.exe linking to the static library xmp_static.lib
 #
 !ifndef target
 target = dll

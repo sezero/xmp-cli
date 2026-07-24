@@ -2,7 +2,7 @@ CPPFLAGS+= -DHAVE_SIGNAL_H -DHAVE_STRINGS_H
 INCLUDES+= -Isrc
 
 !ifeq target static
-CPPFLAGS+= -DBUILDING_STATIC
+CPPFLAGS+= -DBUILDING_STATIC -DLIBXMP_STATIC
 LIBXMP=$(libxmp_path)/xmp_static.lib
 !else
 LIBXMP=$(libxmp_path)/libxmp.lib

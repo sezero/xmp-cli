@@ -1,7 +1,7 @@
 # Makefile for MS-DOS using Watcom compiler.
 #
 # wmake -f Makefile.dos
-# - builds using the static library xmp_static.lib
+# - builds xmp.exe linking to the static library xmp_static.lib
 #
 target = static
 # change libxmp_path as needed (or specify on the wmake cmdline)
