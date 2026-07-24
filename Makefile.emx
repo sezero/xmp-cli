@@ -1,0 +1,38 @@
+# GNU Makefile for OS/2 -- using GCC/EMX KLIBC environment
+#	make -f Makefile.emx
+#
+# Building against libxmp >= 4.7.1, which includes a Makefile.emx,
+#  is recommended.
+
+# change libxmp_path as needed (or specify on the make cmdline.)
+ifeq ($(libxmp_path),)
+libxmp_path = ../libxmp
+endif
+
+EXE	= xmp.exe
+
+ifeq ($(CROSS),)
+CC	= gcc
+else
+CC	= $(CROSS)-gcc
+endif
+CPPFLAGS= -DSOUND_OS2DART -DHAVE_SIGNAL_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H
+CFLAGS	= -I$(libxmp_path)/include -Wall -O2 -fsigned-char -Zmt
+LDFLAGS = -Zomf -Zmt
+LDLIBS	= -L$(libxmp_path) -lxmp -lmmpm2
+
+OBJS	= commands.o delay.o getopt_long.o info.o main.o options.o read_config.o sound.o sound_dart.o sound_aiff.o sound_file.o sound_wav.o sound_null.o terminal.o util.o
+
+.PHONY: clean distclean
+
+all: $(EXE)
+
+%.o: src/%.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+
+$(EXE): $(OBJS)
+	$(CC) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $@
+clean:
+	$(RM) *.o
+distclean: clean
+	$(RM) $(EXE)
